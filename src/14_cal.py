@@ -27,6 +27,39 @@ print out a calendar for April in 2015, but if you omit either the year or both 
 it should use today’s date to get the month and year.
 """
 
+
 import sys
 import calendar
 from datetime import datetime
+
+currentMonth = datetime.today().month
+currentYear = datetime.today().year
+
+myCal = calendar.TextCalendar(calendar.SUNDAY)
+
+
+def createdCal(currentMonth, currentYear):
+    return myCal.formatmonth(currentYear, currentMonth)
+
+if len(sys.argv) == 1:
+        print(createdCal(currentMonth, currentYear))
+
+elif len(sys.argv) == 2:
+    try:
+        int(sys.argv[1])
+        month = int(sys.argv[1])
+        print(createdCal(month))
+    except ValueError:
+        print('Please enter valid numbers')
+elif len(sys.argv) == 3:
+    try:
+        int(sys.argv[1]) and int(sys.argv[2])
+        month = int(sys.argv[1])
+        year = int(sys.argv[2])
+        print(createdCal(month, year))
+
+    except ValueError:
+        print('Please enter a valid numbers')
+else:
+    print('Use the format (cal.py mm yyyy)')
+print(createdCal(3, 2020))
